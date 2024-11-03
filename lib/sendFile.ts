@@ -1,13 +1,12 @@
 import nodemailer from 'nodemailer';
-
+import { render } from '@react-email/render';
 
 export async function sendFile(
   to: string,
   subject: string,
-  text: string,
+  text: React.ReactElement,
   originalFilename: string,
   fileBuffer: Buffer
-
 ) {
   const port = parseInt(process.env.SMTP_PORT || '465', 10);
   const transporter = nodemailer.createTransport({
@@ -24,12 +23,13 @@ export async function sendFile(
       minVersion: 'TLSv1.2',
     }
   });
+  const html = await render(text)
 
   const mailOptions = {
     from: process.env.FROM_EMAIL,
     to,
     subject,
-    text,
+    html,
     attachments: [
       {
         filename: originalFilename,

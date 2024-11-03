@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 async function processEmail(email: {
   to: string;
   subject: string;
-  text: string;
+  text: React.ReactElement;
   attachments: { originalFilename: string; fileBuffer: string }[];
 }) {
   const { to, subject, text, attachments } = email;

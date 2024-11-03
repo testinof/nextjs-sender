@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
-const API_BASE_URL = 'https://next-js-shadcn-bulk-file-sender.vercel.app/api';
+// const API_BASE_URL = 'https://next-js-shadcn-bulk-file-sender.vercel.app/api';
+const API_BASE_URL = "http://localhost:3000/api"
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -29,7 +30,7 @@ function handleApiError(error: unknown, context: string): never {
 export async function sendEmailBatch(emails: {
   to: string;
   subject: string;
-  text: string;
+  text: React.ReactElement;
   attachments: { originalFilename: string; fileBuffer: string }[];
 }[]) {
   try {
