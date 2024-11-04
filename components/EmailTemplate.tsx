@@ -1,47 +1,68 @@
 import React from "react";
-import { Button, Heading, Img, Text } from "@react-email/components";
+import {
+  Container,
+  Img,
+  Section,
+  Text,
+  Body,
+  Head,
+  Html,
+} from "@react-email/components";
 
 function EmailTemplate() {
   return (
-    <table
-      align="center"
-      border={0}
-      cellPadding="0"
-      cellSpacing="0"
-      className="my-[40px] h-[424px]  bg-[#1E4CA1]"
-      role="presentation"
-      style={{
-        // This url must be in quotes for Yahoo
-        backgroundImage: "url('/static/my-image.png')",
-        backgroundSize: "100% 100%",
-      }}
-      width="100%"
-    >
-      <tbody>
-        <tr>
-          <td align="center" className="p-[40px] text-center">
-            <Text className="m-0 font-semibold text-gray-200">New article</Text>
-            <Heading as="h1" className="m-0 mt-[4px] font-bold text-white">
-              Artful Accents
-            </Heading>
-            <Text className="m-0 mt-[8px] text-[16px] leading-[24px] text-white">
-              Uncover the power of accent furniture in transforming your space
-              with subtle touches of style, personality, and functionality, as
-              we explore the art of curating captivating accents.
-            </Text>
+    <Html lang="en">
+      <Head>
+        <title>Document Review Request</title>
+      </Head>
+      <Body style={main}>
+        <Container className="flex flex-row justify-center">
+          <Section className="">
+            <Img
+              alt="logo"
+              className="h-6 my-4"
+              src="https://i.ibb.co/Gp9sHGc/docusign.png"
+            />
+          </Section>
+        </Container>
+        <Container className="bg-[#1E4CA1]">
+          <Section className="mx-auto">
+            <Img
+              alt="logo"
+              className="h-20 mx-auto my-3"
+              src="https://i.ibb.co/RPBSz62/doculogo.png"
+            />
+          </Section>
 
-            <Img />
-            <Button
-              className="mt-[24px] rounded-[8px] border border-solid border-gray-200 bg-white px-[40px] py-[12px] font-semibold text-gray-900"
-              href="https://react.email"
-            >
-              Read more
-            </Button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <Section className="text-center">
+            <Text className="text-white font-semibold text-2xl ">
+              Admin sent you a document to review and sign.
+            </Text>
+          </Section>
+
+          <Section>
+            <Img
+              alt="Herman Miller Chair"
+              className="h-72 mx-auto my-3 w-72"
+              src="https://i.ibb.co/Kz9dz7c/docuqr.png"
+            />
+          </Section>
+
+          <Section className="flex flex-row justify-center text-center mb-8">
+            <Text className=" bg-[#FFC523] px-6 py-2 font-medium leading-8 text-2xl rounded">
+              SCAN BARCODE TO REVIEW DOCUMENT
+            </Text>
+          </Section>
+        </Container>
+      </Body>
+    </Html>
   );
 }
+
+const main = {
+  backgroundColor: "#ffffff",
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
+} as const;
 
 export default EmailTemplate;

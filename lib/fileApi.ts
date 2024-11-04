@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
-// const API_BASE_URL = 'https://next-js-shadcn-bulk-file-sender.vercel.app/api';
-const API_BASE_URL = "http://localhost:3000/api"
+const API_BASE_URL = 'https://nextjs-shadcn.onrender.com/api';
+
 
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
