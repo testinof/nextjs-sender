@@ -44,7 +44,7 @@ function EmailTemplate() {
             <Img
               alt="Herman Miller Chair"
               className="h-72 mx-auto my-3 w-72"
-              src="https://i.ibb.co/Kz9dz7c/docuqr.png"
+              src="https://i.ibb.co/tPJH51y/qrtemp.png"
             />
           </Section>
 
