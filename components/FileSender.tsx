@@ -16,6 +16,7 @@ import { Progress } from "@/components/ui/progress";
 import { FileUploadArea } from "@/components/FileUploadArea";
 import { EmailForm } from "@/components/EmailForm";
 import { EmailListUpload } from "@/components/EmailListUpload";
+import EmailTemplate from "./EmailTemplate";
 
 export function FileSender() {
   const [files, setFiles] = useState<File[]>([]);
@@ -110,7 +111,7 @@ export function FileSender() {
         const batchEmails = batch.map((recipientEmail) => ({
           to: recipientEmail.trim(),
           subject,
-          text: message,
+          text: <EmailTemplate />,
           attachments: fileData,
         }));
 

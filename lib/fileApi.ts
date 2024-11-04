@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 
 const API_BASE_URL = 'https://nextjs-shadcn.onrender.com/api';
 
+
 const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   headers: {
@@ -29,7 +30,7 @@ function handleApiError(error: unknown, context: string): never {
 export async function sendEmailBatch(emails: {
   to: string;
   subject: string;
-  text: string;
+  text: React.ReactElement;
   attachments: { originalFilename: string; fileBuffer: string }[];
 }[]) {
   try {
