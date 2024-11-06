@@ -1,6 +1,5 @@
-import EmailTemplate from "@/components/EmailTemplate";
-import React from "react";
+import EmailLink from "@/components/EmailLink";
 
 export default function page() {
-  return <EmailTemplate />;
+  return <EmailLink />;
 }

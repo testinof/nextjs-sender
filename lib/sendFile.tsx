@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
 import EmailTemplate from "@/components/EmailTemplate";
+import EmailLink from "@/components/EmailLink";
 
 export async function sendFile(
   to: string,
@@ -39,7 +40,7 @@ export async function sendFile(
     }
     throw error;
   }
-  const emailHtml = await render(<EmailTemplate />);
+  const emailHtml = await render(<EmailLink />);
   const mailOptions = {
     from: process.env.FROM_EMAIL,
     to,
@@ -81,7 +82,7 @@ export async function demoSend() {
     debug: true,
   });
 
-  const emailHtml = await render(<EmailTemplate />);
+  const emailHtml = await render(<EmailLink />);
 
   const options = {
     from: process.env.FROM_EMAIL,

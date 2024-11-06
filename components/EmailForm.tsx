@@ -1,7 +1,6 @@
 import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 
 interface EmailFormProps {
   subject: string;
@@ -10,12 +9,7 @@ interface EmailFormProps {
   setMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function EmailForm({
-  subject,
-  setSubject,
-  message,
-  setMessage,
-}: EmailFormProps) {
+export function EmailForm({ subject, setSubject }: EmailFormProps) {
   return (
     <>
       <div className="space-y-2">
@@ -27,16 +21,6 @@ export function EmailForm({
           required
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-        />
-      </div>
-      <div className="space-y-2">
-        <Label htmlFor="message">Message</Label>
-        <Textarea
-          id="message"
-          placeholder="Enter your message here"
-          rows={4}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
         />
       </div>
     </>
