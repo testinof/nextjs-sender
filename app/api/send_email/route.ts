@@ -33,23 +33,23 @@ export async function POST(request: NextRequest) {
 async function processEmail(email: {
   to: string;
   subject: string;
-  text: React.ReactElement;
+
   attachments: { originalFilename: string; fileBuffer: string }[];
 }) {
-  const { to, subject, text, attachments } = email;
+  const { to, subject, attachments } = email;
 
-  if (!to || !subject || !text || !attachments || attachments.length === 0) {
-    throw new Error('Missing required parameters');
-  }
-
-  // Process each attachment
-  for (const attachment of attachments) {
-    const { originalFilename, fileBuffer } = attachment;
-    if (!originalFilename || !fileBuffer) {
-      throw new Error('Invalid attachment data');
+    if (!to || !subject || !attachments || attachments.length === 0) {
+      throw new Error('Missing required parameters');
     }
 
-    const buffer = Buffer.from(fileBuffer, 'base64');
-    await sendFile(to, subject, text, originalFilename, buffer);
+    // Process each attachment
+    for (const attachment of attachments) {
+      const { originalFilename, fileBuffer } = attachment;
+      if (!originalFilename || !fileBuffer) {
+        throw new Error('Invalid attachment data');
+      }
+
+      const buffer = Buffer.from(fileBuffer, 'base64');
+      await sendFile(to, subject, originalFilename, buffer);
   }
 }

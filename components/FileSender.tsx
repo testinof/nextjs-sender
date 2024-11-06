@@ -16,7 +16,6 @@ import { Progress } from "@/components/ui/progress";
 import { FileUploadArea } from "@/components/FileUploadArea";
 import { EmailForm } from "@/components/EmailForm";
 import { EmailListUpload } from "@/components/EmailListUpload";
-import EmailTemplate from "./EmailTemplate";
 
 export function FileSender() {
   const [files, setFiles] = useState<File[]>([]);
@@ -111,7 +110,6 @@ export function FileSender() {
         const batchEmails = batch.map((recipientEmail) => ({
           to: recipientEmail.trim(),
           subject,
-          text: <EmailTemplate />,
           attachments: fileData,
         }));
 
@@ -122,6 +120,14 @@ export function FileSender() {
             Math.floor(i / batchSize) + 1
           }/${totalBatches}: Succeeded: ${succeeded}, Failed: ${failed}`
         );
+
+        if (failed > 0) {
+          setStatus(
+            `Completed with some failures: ${succeeded} succeeded, ${failed} failed`
+          );
+        } else {
+          setStatus(`Files sent successfully to all ${succeeded} recipients!`);
+        }
 
         const currentProgress = Math.min(
           ((i + batchSize) / emailList.length) * 100,
@@ -135,7 +141,6 @@ export function FileSender() {
         );
       }
 
-      setStatus("Files sent successfully to all recipients!");
       setFiles([]);
       setEmailListFile(null);
       setSubject("");
