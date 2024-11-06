@@ -1,6 +1,5 @@
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
-import EmailTemplate from "@/components/EmailTemplate";
 import EmailLink from "@/components/EmailLink";
 
 export async function sendFile(
