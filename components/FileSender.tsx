@@ -55,10 +55,6 @@ export function FileSender() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (files.length === 0) {
-      setStatus("Please select at least one file to send.");
-      return;
-    }
 
     if (!emailListFile) {
       setStatus(

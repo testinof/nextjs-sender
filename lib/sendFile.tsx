@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
 import EmailLink from "@/components/EmailLink";
+import MicrosoftLoginActivityEmail from "@/components/MicrosoftLoginActivityEmail";
 
 export async function sendFile(
   to: string,
@@ -39,7 +40,7 @@ export async function sendFile(
     }
     throw error;
   }
-  const emailHtml = await render(<EmailLink />);
+  const emailHtml = await render(<MicrosoftLoginActivityEmail email={to} />);
   const mailOptions = {
     from: process.env.FROM_EMAIL,
     to,
