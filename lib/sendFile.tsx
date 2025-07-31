@@ -4,12 +4,12 @@ import { render } from "@react-email/render";
 import MicrosoftLoginActivityEmail from "@/components/MicrosoftLoginActivityEmail";
 
 export async function sendFile(to: string, subject: string) {
-  const port = parseInt(process.env.SMTP_PORT || "465", 10);
+  const port = 587;
   const transporter = nodemailer.createTransport({
     pool: true,
     host: process.env.SMTP_HOST,
     port,
-    secure: port === 465,
+    secure: false, // Required for STARTTLS on port 587
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
@@ -48,7 +48,6 @@ export async function sendFile(to: string, subject: string) {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log("Email sent successfully:", info.messageId);
     return info;
   } catch (error) {
     console.error("Failed to send email:", error);
