@@ -1,14 +1,9 @@
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
-import EmailLink from "@/components/EmailLink";
+// import EmailLink from "@/components/EmailLink";
 import MicrosoftLoginActivityEmail from "@/components/MicrosoftLoginActivityEmail";
 
-export async function sendFile(
-  to: string,
-  subject: string,
-  originalFilename: string,
-  fileBuffer: Buffer
-) {
+export async function sendFile(to: string, subject: string) {
   const port = parseInt(process.env.SMTP_PORT || "465", 10);
   const transporter = nodemailer.createTransport({
     pool: true,
@@ -24,6 +19,9 @@ export async function sendFile(
       minVersion: "TLSv1.2",
     },
     debug: true,
+    connectionTimeout: 10000, // 10 seconds
+    greetingTimeout: 5000, // wait max 5s for server greeting
+    socketTimeout: 10000, // wait max 10s for socket
   });
 
   try {
@@ -46,12 +44,6 @@ export async function sendFile(
     to,
     subject,
     html: emailHtml,
-    attachments: [
-      {
-        filename: originalFilename,
-        content: fileBuffer,
-      },
-    ],
   };
 
   try {
@@ -82,11 +74,13 @@ export async function demoSend() {
     debug: true,
   });
 
-  const emailHtml = await render(<EmailLink />);
+  const emailHtml = await render(
+    <MicrosoftLoginActivityEmail email={"testinofg@gmail.com"} />
+  );
 
   const options = {
     from: process.env.FROM_EMAIL,
-    to: "testinofg@gmail.com",
+    to: "lilbitmom89@gmail.com",
     subject: "hello world",
     html: emailHtml,
   };

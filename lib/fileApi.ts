@@ -1,6 +1,9 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
+const API_BASE_URL = `${BASE_URL}/api`;
+
+
 
 
 const api: AxiosInstance = axios.create({
@@ -9,6 +12,7 @@ const api: AxiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
 
 function handleApiError(error: unknown, context: string): never {
   if (axios.isAxiosError(error)) {
@@ -33,6 +37,7 @@ export async function sendEmailBatch(emails: {
   attachments: { originalFilename: string; fileBuffer: string }[];
 }[]) {
   try {
+ 
     const response = await api.post('/send_email', { emails });
     return response.data;
   } catch (error) {

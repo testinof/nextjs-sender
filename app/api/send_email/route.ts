@@ -20,6 +20,8 @@ export async function POST(request: NextRequest) {
       limiter.schedule(() => processEmail(email))
     ));
 
+    console.log("resukt: ", results)
+
     const succeeded = results.filter(r => r.status === 'fulfilled').length;
     const failed = results.filter(r => r.status === 'rejected').length;
 
@@ -33,23 +35,26 @@ export async function POST(request: NextRequest) {
 async function processEmail(email: {
   to: string;
   subject: string;
-
-  attachments: { originalFilename: string; fileBuffer: string }[];
+  attachments?: { originalFilename: string; fileBuffer: string }[];
 }) {
   const { to, subject, attachments } = email;
 
-    if (!to || !subject || !attachments || attachments.length === 0) {
-      throw new Error('Missing required parameters');
-    }
+  if (!to) throw new Error("Missing 'to' email address");
+  if (!subject) throw new Error("Missing 'subject'");
 
-    // Process each attachment
+  if (attachments && attachments.length > 0) {
     for (const attachment of attachments) {
       const { originalFilename, fileBuffer } = attachment;
       if (!originalFilename || !fileBuffer) {
-        throw new Error('Invalid attachment data');
+        console.warn("Skipping invalid attachment:", attachment);
+        continue; // skip invalid attachment
       }
 
-      const buffer = Buffer.from(fileBuffer, 'base64');
-      await sendFile(to, subject, originalFilename, buffer);
+      await sendFile(to, subject);
+    }
+  } else {
+    // Send email without attachment
+    await sendFile(to, subject);
   }
 }
+
