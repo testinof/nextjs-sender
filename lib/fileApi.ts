@@ -34,12 +34,12 @@ function handleApiError(error: unknown, context: string): never {
 export async function sendEmailBatch(emails: {
   to: string;
   subject: string;
-  attachments: { originalFilename: string; fileBuffer: string }[];
+  attachments?: { originalFilename: string; fileBuffer: string }[];
 }[]) {
   try {
  
     const response = await api.post('/send_email', { emails });
-    return response.data;
+    return response.data.results;
   } catch (error) {
     handleApiError(error, 'Error sending email batch');
     throw error;

@@ -11,18 +11,34 @@ interface EmailFormProps {
 
 export function EmailForm({ subject, setSubject }: EmailFormProps) {
   return (
-    <>
+    <div className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="subject">Subject</Label>
+        <Label htmlFor="subject" className="text-gray-700">
+          Email Subject
+        </Label>
         <Input
           id="subject"
           type="text"
-          placeholder="File transfer"
+          placeholder="Your secure file delivery"
           required
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
+          className="focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
-    </>
+    </div>
+    // <>
+    //   <div className="space-y-2">
+    //     <Label htmlFor="subject">Subject</Label>
+    //     <Input
+    //       id="subject"
+    //       type="text"
+    //       placeholder="File transfer"
+    //       required
+    //       value={subject}
+    //       onChange={(e) => setSubject(e.target.value)}
+    //     />
+    //   </div>
+    // </>
   );
 }
